@@ -1,0 +1,58 @@
+import Keyboard from './KeyboardStates.js';
+
+export function setupKeyboard(entity) {
+    const W = 'KeyW';
+    const input = new Keyboard();
+    input.addMapping(W, keyState => {
+        if(keyState) {
+            entity.ascend.start();
+        }
+        else{
+            entity.ascend.cancel();
+        }
+    });
+
+    const S = 'KeyS';
+    input.addMapping(S, keyState => {
+        if(keyState) {
+            entity.descend.start();
+        }
+        else{
+            entity.descend.cancel();
+        }
+    });
+
+    const D = 'KeyD';
+    input.addMapping(D, keyState => {
+        entity.go.direction = keyState;
+    });
+
+    const A = 'KeyA';
+    input.addMapping(A, keyState => {
+        entity.go.direction = -keyState;
+    });
+
+
+     // const arrowRight = 'ArrowRight';
+    // input.addMapping(arrowRight, keyState => {
+    //     if(keyState) {
+    //         playerFighter.accelerate.start();
+    //     }
+    //     else{
+    //         playerFighter.accelerate.cancel();
+    //     }
+    // });
+
+    
+    // const arrowLeft = 'ArrowLeft';
+    // input.addMapping(arrowLeft, keyState => {
+    //     if(keyState) {
+    //         playerFighter.decelerate.start();
+    //     }
+    //     else{
+    //         playerFighter.decelerate.cancel();
+    //     }
+    // });
+
+    return input;
+}
