@@ -4,7 +4,7 @@ import { loadLevel } from './loaders.js';
 import { createPlayerFighter } from './entities.js';
 import { createCollisionLayer, createCameraLayer } from './layers.js';
 import { setupKeyboard } from './input.js';
-import { setupMouseControl } from './debug.js';
+// import { setupMouseControl } from './debug.js';
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
@@ -20,25 +20,33 @@ Promise.all([
     window.camera = camera;
     
     playerFighter.pos.set(100, 100);
-
+    
     level.comp.layers.push(createCollisionLayer(level));
     level.comp.layers.push(createCameraLayer(camera));
 
     level.entities.add(playerFighter);
     
+     
+
     const input = setupKeyboard(playerFighter);
     input.listenTo(window);
 
-    setupMouseControl(canvas, playerFighter, camera);
+    // setupMouseControl(canvas, playerFighter, camera);
 
     const timer = new Timer(1/60);
-
-   
 
     timer.update =  function update(deltaTime) { 
         level.update(deltaTime);
 
+        if (playerFighter.pos.x > 200 ) {
+            camera.pos.x = playerFighter.pos.x - 200;
+        }
+        
         level.comp.draw(context, camera);
+
+        if (playerFighter.collided) {
+            level.entities.delete(playerFighter);
+        }
     }
 
     timer.start();

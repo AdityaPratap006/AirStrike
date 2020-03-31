@@ -24,12 +24,12 @@ export function setupKeyboard(entity) {
 
     const D = 'KeyD';
     input.addMapping(D, keyState => {
-        entity.go.direction = keyState;
+        entity.go.direction += keyState ? 1 : -1;
     });
 
     const A = 'KeyA';
     input.addMapping(A, keyState => {
-        entity.go.direction = -keyState;
+        entity.go.direction += keyState ? -1 : 1;
     });
 
 

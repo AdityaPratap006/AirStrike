@@ -1,35 +1,75 @@
 {
     "spriteSheet" : "overworld",
     "backgrounds" : [
-        
         {
-            "tile": "ground",
-            "type": "ground",
+            "tile": "sky",
             "ranges": [
                 [
-                    0, 200, 4
+                    0, 2000, 
+                    0, 4
                 ]
             ]
         },
         {
-            "tile": "sea",
+            "tile": "ground-middle",
             "type": "ground",
             "ranges": [
                 [
-                    0, 200, 4
+                    0, 2000, 
+                    4
                 ]
             ]
         },
        
         {
-            "tile": "ground",
+            "tile": "ground-middle",
             "type": "ground",
             "ranges": [
                 [
-                    0, 21, 4
+                    0, 19, 
+                    4
                 ],
                 [
-                    26, 200, 4
+                    27, 2, 
+                    4
+                ],
+                [
+                    37, 4 , 
+                    3
+                ]
+            ]
+        },
+        {
+            "tile": "ground-end",
+            "type": "ground",
+            "ranges": [
+                [
+                    19, 4
+                ],
+                [
+                    41, 3
+                ]
+            ]
+        },
+        {
+            "tile": "ground-start",
+            "type": "ground",
+            "ranges": [
+                [
+                    26, 4
+                ],
+                [
+                    36, 3
+                ]
+            ]
+        },
+        {
+            "tile": "sky",
+
+            "ranges": [
+                [
+                    20, 6, 
+                    4
                 ]
             ]
         },
@@ -38,7 +78,8 @@
             "type": "ground",
             "ranges": [
                 [
-                    21, 5, 4
+                    20, 6, 
+                    4
                 ]
             ]
         }

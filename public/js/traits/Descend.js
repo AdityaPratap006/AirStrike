@@ -1,12 +1,12 @@
 import { Trait } from '../Entity.js';
 
 export default class Descend extends Trait {
-    constructor(descendSpeed) {
+    constructor() {
         super('descend');
 
         this.duration = 5000;
         this.engageTime = 0;
-        this.descendSpeed = descendSpeed;
+        this.descendSpeed = 0.0005;
     }
 
     start() {
