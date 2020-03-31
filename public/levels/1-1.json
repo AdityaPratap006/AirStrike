@@ -1,16 +1,44 @@
 {
+    "spriteSheet" : "overworld",
     "backgrounds" : [
+        
         {
             "tile": "ground",
+            "type": "ground",
             "ranges": [
                 [
-                    0, 1100, 4, 5
+                    0, 200, 4
+                ]
+            ]
+        },
+        {
+            "tile": "sea",
+            "type": "ground",
+            "ranges": [
+                [
+                    0, 200, 4
+                ]
+            ]
+        },
+       
+        {
+            "tile": "ground",
+            "type": "ground",
+            "ranges": [
+                [
+                    0, 21, 4
                 ],
                 [
-                    6, 7, 0, 2
-                ],
+                    26, 200, 4
+                ]
+            ]
+        },
+        {
+            "tile": "sea",
+            "type": "ground",
+            "ranges": [
                 [
-                    2, 4, 3, 4 
+                    21, 5, 4
                 ]
             ]
         }

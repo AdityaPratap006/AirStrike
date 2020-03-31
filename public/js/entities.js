@@ -1,19 +1,19 @@
 import Entity from './Entity.js';
-import { loadPlayerFighterSprites } from './sprites.js';
-import Velocity from './traits/Velocity.js'; 
 import Acceleration from './traits/Acceleration.js';
 import Deceleration from './traits/Deceleration.js';
 import Ascend from './traits/Ascend.js';
 import Descend from './traits/Descend.js';
 import Go from './traits/Go.js';
+import { loadSpriteSheet } from './loaders.js';
 
 export async function createPlayerFighter() {
 
-    return loadPlayerFighterSprites()
+    return loadSpriteSheet('playerFighter')
     .then(sprite => {
+        
         const playerFighter = new Entity();
         playerFighter.size.set(sprite.width*sprite.scale, sprite.height*sprite.scale);
-
+        // playerFighter.vel.set(50000, -100)
         playerFighter.addTrait(new Go());
         // playerFighter.addTrait(new Velocity());
         playerFighter.addTrait(new Acceleration(0.005));
@@ -23,7 +23,7 @@ export async function createPlayerFighter() {
         
 
         playerFighter.draw = function drawPlayerFighter(context) {
-            sprite.draw('playerFighter', context, this.pos.x , this.pos.y);
+            sprite.draw('playerFighter', context, 0, 0);
             // for (let i = 0; i < 20; ++i) {
             //     sprite.draw('playerFighter', context, this.position.x + i*140, this.position.y);
             // }

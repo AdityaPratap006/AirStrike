@@ -1,5 +1,5 @@
 export default class SpriteSheet {
-    constructor(image, width, height, scale) {
+    constructor(image, width, height, scale = 1) {
         this.image = image;
         this.width = width;
         this.height = height;
@@ -7,7 +7,10 @@ export default class SpriteSheet {
         this.tiles = new Map();
     }
 
-    define(name, x, y, width, height) {
+    define(name, x, y, width, height, scale = 1) {
+        this.width = width;
+        this.height = height;
+        this.scale = scale;
         const buffer  = document.createElement('canvas');
         buffer.width =  width;
         buffer.height = height;
@@ -41,8 +44,13 @@ export default class SpriteSheet {
        
     }
 
-    defineTile(name, x, y) {
-        this.define(name, x*this.width, y*this.height, this.width, this.height);
+    defineTile(name, x, y, offsetX = 0, offsetY = 0) {
+        this.define(name, 
+            x*this.width + offsetX, 
+            y*this.height + offsetY, 
+            this.width, 
+            this.height
+        );
     }
 
     draw(name, context, x, y) {

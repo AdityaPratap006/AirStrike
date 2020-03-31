@@ -1,0 +1,10 @@
+{
+    "imageURL": "../images/aircrafts/F-22-right.png",
+    "frames" : [
+        {
+            "name": "playerFighter",
+            "scale": 0.7,
+            "rect": [0, 0, 257, 57]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "imageURL": "../images/tiles.png",
+    "tileW": 128,
+    "tileH": 128,
+    "scale": 1,
+    "tiles": [
+        {
+            "name": "ground",
+            "index": [2, 2],
+            "offsetX": 0,
+            "offsetY": 0
+        },
+        {
+            "name": "sea",
+            "index": [1, 2],
+            "offsetX": 0,
+            "offsetY": 10
+        },
+        {
+            "name": "waves",
+            "index": [0, 2],
+            "offsetX": 0,
+            "offsetY": 0
+        }
+    ]
+}
