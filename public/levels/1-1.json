@@ -1,86 +1,92 @@
 {
     "spriteSheet" : "overworld",
-    "backgrounds" : [
-        {
-            "tile": "sky",
-            "ranges": [
-                [
-                    0, 2000, 
-                    0, 4
-                ]
-            ]
-        },
-        {
-            "tile": "ground-middle",
-            "type": "ground",
-            "ranges": [
-                [
-                    0, 2000, 
-                    4
-                ]
-            ]
-        },
-       
-        {
-            "tile": "ground-middle",
-            "type": "ground",
-            "ranges": [
-                [
-                    0, 19, 
-                    4
-                ],
-                [
-                    27, 2, 
-                    4
-                ],
-                [
-                    37, 4 , 
-                    3
-                ]
-            ]
-        },
-        {
-            "tile": "ground-end",
-            "type": "ground",
-            "ranges": [
-                [
-                    19, 4
-                ],
-                [
-                    41, 3
-                ]
-            ]
-        },
-        {
-            "tile": "ground-start",
-            "type": "ground",
-            "ranges": [
-                [
-                    26, 4
-                ],
-                [
-                    36, 3
-                ]
-            ]
-        },
-        {
-            "tile": "sky",
 
-            "ranges": [
-                [
-                    20, 6, 
-                    4
-                ]
+    "patterns" : {
+        "cloud": {
+            "tiles": [
+                {
+                    "name": "cloud-1",
+                    "ranges": [
+                        [
+                            0, 
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "name": "cloud-2",
+                    "ranges": [
+                        [
+                            1, 
+                            1
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+
+    "layers" : [
+        {
+            "tiles" : [
+                {
+                    "name": "sky",
+                    "ranges": [
+                        [
+                            0, 2000, 
+                            0, 4
+                        ]
+                    ]
+                },
+                {
+                    "name": "ground-middle",
+                    "type": "ground",
+                    "ranges": [
+                        [
+                            0, 2000, 
+                            4
+                        ]
+                    ]
+                },
+               
+                {
+                    "name": "ground-middle",
+                    "type": "ground",
+                    "ranges": [
+                        [
+                            0, 20, 
+                            4
+                        ],
+                        [
+                            26, 2, 
+                            4
+                        ],
+                        [
+                            36, 6, 
+                            3
+                        ]
+                    ]
+                },
+                {
+                    "name": "sea",
+                    "type": "ground",
+                    "ranges": [
+                        [
+                            20, 6, 
+                            4
+                        ]
+                    ]
+                }
             ]
         },
         {
-            "tile": "sea",
-            "type": "ground",
-            "ranges": [
-                [
-                    20, 6, 
-                    4
-                ]
+            "tiles" : [
+                {
+                    "pattern" : "cloud",
+                    "ranges": [
+                       
+                    ]
+                }
             ]
         }
     ]

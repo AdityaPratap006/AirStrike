@@ -1,42 +1,54 @@
 {
-    "imageURL": "../images/tiles3.png",
+    "imageURL": "../images/tiles5.png",
     "tileW": 128,
     "tileH": 128,
     "scale": 1,
     "tiles": [
         {
             "name": "ground-middle",
-            "index": [5, 2],
+            "index": [7, 2],
             "offsetX": 0,
             "offsetY": 0
         },
         {
             "name": "ground-start",
-            "index": [2, 0],
+            "index": [4, 0],
             "offsetX": 0,
             "offsetY": 0
         },
         {
             "name": "ground-end",
-            "index": [4, 3],
+            "index": [6, 3],
             "offsetX": 0,
             "offsetY": 0
         },
         {
             "name": "night-sky",
-            "index": [0, 0],
+            "index": [2, 0],
             "offsetX": 0,
             "offsetY": 0
         },
         {
             "name": "sky",
-            "index": [1, 0],
+            "index": [3, 0],
             "offsetX": 0,
             "offsetY": 0
         },
         {
             "name": "sea",
-            "index": [2, 2],
+            "index": [4, 2],
+            "offsetX": 0,
+            "offsetY": 0
+        },
+        {
+            "name": "cloud-1",
+            "index": [0, 0],
+            "offsetX": 0,
+            "offsetY": 0
+        },
+        {
+            "name": "cloud-2",
+            "index": [1, 0],
             "offsetX": 0,
             "offsetY": 0
         }

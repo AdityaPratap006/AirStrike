@@ -1,27 +1,20 @@
 import { createAircraftExplosion } from './entities.js';
+import TileResolver from './TileResorver.js';
 
 
-export function createBackgroundLayer(level, sprites) {
-    const tiles = level.tiles;
-    const resolver = level.tileCollider.tiles;
+export function createBackgroundLayer(level, tiles, sprites) {
+    const resolver = new TileResolver(tiles);
 
-    const backgroundBuffer = document.createElement('canvas');
-    backgroundBuffer.width = 128*20;
-    backgroundBuffer.height = 128*5;
+    const buffer = document.createElement('canvas');
+    buffer.width = 128*20;
+    buffer.height = 128*5;
 
-    const context = backgroundBuffer.getContext('2d');
+    const context = buffer.getContext('2d');
 
-    let startIndex, endIndex;
-
-    function redraw(drawFrom, drawTo) {
-
-        if ( drawFrom === startIndex && drawTo === endIndex) {
-            return;
-        }
+    function redraw(startIndex, endIndex) {
         
-        startIndex = drawFrom;
-        endIndex = drawTo;
-         
+        context.clearRect(0, 0, buffer.width, buffer.height);
+
         for (let x = startIndex; x <= endIndex; ++x) {
             const col = tiles.grid[x];
             if (col) {
@@ -48,7 +41,7 @@ export function createBackgroundLayer(level, sprites) {
         redraw(drawFrom, drawTo);
 
         
-        context.drawImage(backgroundBuffer, -camera.pos.x % 128, -camera.pos.y);
+        context.drawImage(buffer, -camera.pos.x % 128, -camera.pos.y);
     };
 }
 
@@ -71,7 +64,7 @@ export function createSpriteLayer(entities, width, height) {
                 createAircraftExplosion()
                 .then(aircraftExplosion => {
                     console.log('draw explosion! ', aircraftExplosion);
-                    aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 40);
+                    aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 60);
                     entities.add(aircraftExplosion);
                     setTimeout(() => {
                         entities.delete(aircraftExplosion);
