@@ -5,6 +5,10 @@ export class Trait {
         this.NAME = name;
     }
 
+    obstruct() {
+
+    }
+
     updateTrait() {
         console.warn('Unhandled update call in Trait');
     }
@@ -24,16 +28,18 @@ export default class Entity {
         this[trait.NAME] = trait;
     }
 
-    update(deltaTime) {
-        if (!this.collided) {
-            this.traits.forEach(trait => {
-                trait.update(this, deltaTime);
-            })
-        } else {
-            this.size.set(0, 0);
-            this.traits = [];
-        }
+    obstruct() {
         
+        this.traits.forEach(trait => {
+            trait.obstruct(this);
+        });
+    }
+
+    update(deltaTime) {
+      
+        this.traits.forEach(trait => {
+            trait.update(this, deltaTime);
+        });
     }
      
 }

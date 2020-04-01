@@ -4,6 +4,7 @@ export function setupKeyboard(entity) {
     const W = 'KeyW';
     const input = new Keyboard();
     input.addMapping(W, keyState => {
+        entity.ascend.direction += keyState ? -1 : 1;
         if(keyState) {
             entity.ascend.start();
         }
@@ -14,11 +15,12 @@ export function setupKeyboard(entity) {
 
     const S = 'KeyS';
     input.addMapping(S, keyState => {
+        entity.ascend.direction += keyState ? 1 : -1;
         if(keyState) {
-            entity.descend.start();
+            entity.ascend.start();
         }
         else{
-            entity.descend.cancel();
+            entity.ascend.cancel();
         }
     });
 

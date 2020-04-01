@@ -19,7 +19,7 @@ Promise.all([
     const camera = new Camera();
     window.camera = camera;
     
-    playerFighter.pos.set(100, 100);
+    playerFighter.pos.set(100, 150);
     
     level.comp.layers.push(createCollisionLayer(level));
     level.comp.layers.push(createCameraLayer(camera));
@@ -44,10 +44,10 @@ Promise.all([
         
         level.comp.draw(context, camera);
 
-        if (playerFighter.collided) {
-            level.entities.delete(playerFighter);
-        }
+        
     }
+
+    
 
     timer.start();
 });

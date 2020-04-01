@@ -1,0 +1,25 @@
+{
+    "imageURL": "../images/aircrafts/crash.png",
+    "frames" : [
+        {
+            "name": "explosion-1",
+            "scale": 0.7,
+            "rect": [250, 250 , 210,  210]
+        },
+        {
+            "name": "explosion-2",
+            "scale": 0.7,
+            "rect": [0, 250 , 210,  210]
+        },
+        {
+            "name": "explosion-3",
+            "scale": 0.7,
+            "rect":  [0, 0 , 210,  210]
+        },
+        {
+            "name": "explosion-4",
+            "scale": 0.7,
+            "rect":  [250, 0 , 210,  210]
+        }
+    ]
+}

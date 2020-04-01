@@ -1,3 +1,5 @@
+import { createAircraftExplosion } from './entities.js';
+
 
 export function createBackgroundLayer(level, sprites) {
     const tiles = level.tiles;
@@ -59,17 +61,35 @@ export function createSpriteLayer(entities, width, height) {
 
     return function drawSpriteLayer(context, camera) {
 
+         
+
         
         entities.forEach(entity => {
             spriteBufferContext.clearRect(0, 0, width, height);
 
+            if (entity.go && entity.go.isObstructed) {
+                createAircraftExplosion()
+                .then(aircraftExplosion => {
+                    console.log('draw explosion! ', aircraftExplosion);
+                    aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 40);
+                    entities.add(aircraftExplosion);
+                    setTimeout(() => {
+                        entities.delete(aircraftExplosion);
+                    }, 400);
+                    
+                })
+
+                entities.delete(entity);
+            }
+            else {
+                entity.draw(spriteBufferContext);
+                context.drawImage(
+                    spriteBuffer,
+                    entity.pos.x - camera.pos.x,
+                    entity.pos.y - camera.pos.y,
+                );
+            }
             
-            entity.draw(spriteBufferContext);
-            context.drawImage(
-                spriteBuffer,
-                entity.pos.x - camera.pos.x,
-                entity.pos.y - camera.pos.y,
-            );
            
         });
     };

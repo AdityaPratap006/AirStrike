@@ -7,6 +7,7 @@ export default class Ascend extends Trait {
         this.duration = 5000;
         this.engageTime = 0;
         this.ascendSpeed = 0.0005;
+        this.direction = 0;
     }
 
     start() {
@@ -20,6 +21,7 @@ export default class Ascend extends Trait {
 
     update(entity, deltaTime) {
         // entity.pos.x +=  entity.vel.x * deltaTime;
+        this.ascendSpeed = entity.vel.x / 1000000;
         if (entity.pos.y <= 0) {
             return;
         }
@@ -27,8 +29,8 @@ export default class Ascend extends Trait {
         if (this.engageTime > 0 && entity.pos.y >= 0 ) {
           
             if (entity.pos.y > 0){
-                entity.pos.y -= this.ascendSpeed * this.engageTime;
-                entity.vel.y = -this.ascendSpeed;
+                entity.pos.y += this.direction * this.ascendSpeed * this.engageTime;
+                entity.vel.y = this.direction * this.ascendSpeed;
             }else{
                 entity.vel.y = 0;
                 entity.pos.y = 0;
