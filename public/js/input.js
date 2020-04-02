@@ -39,7 +39,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Numpad1, keyState => {
         if (keyState) {
             console.log('fire missile!');
-            entity.fire.fireMissile();
+            entity.fireMissile.fireMissile();
         }
 
         // entity.fire.cancelMissileFire();
@@ -50,7 +50,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Digit1, keyState => {
         if (keyState) {
             console.log('fire missile!');
-            entity.fire.fireMissile();
+            entity.fireMissile.fireMissile();
         }
 
         // entity.fire.cancelMissileFire();

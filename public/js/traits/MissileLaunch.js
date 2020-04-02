@@ -5,17 +5,22 @@ export default class MissileLaunch extends Trait {
         super('missileLaunch');
 
         this.direction = 1;
-        this.speed = 3000;
+        this.speed = 2000;
         this.isObstructed = false;
+        this.maxRange = 128*15;
+     
     }
 
     obstruct(entity) {
         this.isObstructed = true;
     }
 
+    passedMaxRange(entity, firingPosition) {
+        return (entity.pos.x - firingPosition) > this.maxRange;
+    }
 
     update(entity, deltaTime) {
-         
+
          
         if(this.isObstructed === true) {
             entity.vel.x = 0;

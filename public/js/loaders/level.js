@@ -4,58 +4,92 @@ import { Matrix } from '../math.js';
 import { createBackgroundLayer, createSpriteLayer } from '../layers.js';
 import { loadJSON, loadSpriteSheet } from '../loaders.js';
 
-export async function loadLevel(name) {
+function setupCollision(levelSpec, level) {
+    const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
+        return mergedTiles.concat(layerSpec.tiles);
+    }, []);
 
-    return loadJSON(`../levels/${name}.json`)
-    .then(levelSpec => {
-
-        //To randomly populate the clouds without manually putting them in JSON
-        levelSpec.layers.forEach(layer => {
-            layer.tiles.forEach(tile => {
-                if(tile.pattern === 'cloud') {
-                    const yIndexOfCloud = [-1, 0, 1];
-                    let lastIndex = 0;
-                    for(let i=2; i < 2000; i += 4) {
-                        let randomIndex =  Math.floor(Math.random()*yIndexOfCloud.length);
-                        // randomIndex = (randomIndex === lastIndex) ? (lastIndex - 1) % yIndexOfCloud.length : randomIndex;
-                        tile.ranges.push([i, yIndexOfCloud[randomIndex]]);
-    
-                    }
-                }
-            });
-        }); 
-
-
-        return Promise.all([
-            levelSpec,
-            loadSpriteSheet(levelSpec.spriteSheet),
-        ]);
-    })
-    .then(([levelSpec, backgroundSprites]) => {
-
-        const level = new Level();
-
-        const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
-            return mergedTiles.concat(layerSpec.tiles);
-        }, []);
-
-        const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-        level.setCollisionGrid(collisionGrid);
-
-        levelSpec.layers.forEach(layer => {
-            const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-            const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
-            level.comp.layers.push(backgroundLayer);
-        });
-
-        const spriteLayer = createSpriteLayer(level.entities, 128*3, 128*3);
-        level.comp.layers.push(spriteLayer);
-        
-        // console.table(level.tiles.grid);
-
-        return level;
-    })
+    const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
+    level.setCollisionGrid(collisionGrid);
 }
+
+function setupBackgrounds(levelSpec, level, backgroundSprites) {
+    levelSpec.layers.forEach(layer => {
+        const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+        level.comp.layers.push(backgroundLayer);
+    });
+}
+
+function setupEntities(levelSpec, level, entityFactory) {
+    const directions = [1, -1];
+    let randomDirection = 0;
+    levelSpec.entities.forEach(({name, pos: [x, y]}) => {
+        const createEntity = entityFactory[name];
+        const entity = createEntity();
+        entity.pos.set(x, y);
+        // randomDirection = directions[Math.floor(Math.random() * directions.length)];
+        // entity.vel.set(50 * randomDirection, 0);
+      
+        level.entities.add(entity);
+    });
+
+    const spriteLayer = createSpriteLayer(level.entities, 128*3, 128*3);
+    level.comp.layers.push(spriteLayer);
+}
+
+
+export  function createLevelLoader(entityFactory) {
+
+  return async function loadLevel(name) {
+
+        return loadJSON(`../levels/${name}.json`)
+        .then(levelSpec => {
+            //To randomly populate the clouds without manually putting them in JSON
+            levelSpec.layers.forEach(layerSpec => {
+                layerSpec.tiles.forEach(tileSpec => {
+                    if(tileSpec.pattern === 'cloud') {
+                        const yIndexOfCloud = [-1, 0, 1];
+                        // let lastIndex = 0;
+                        for(let i=2; i < 1650; i += 4) {
+                            let randomIndex =  Math.floor(Math.random()*yIndexOfCloud.length);
+                            // randomIndex = (randomIndex === lastIndex) ? (lastIndex - 1) % yIndexOfCloud.length : randomIndex;
+                            tileSpec.ranges.push([i, yIndexOfCloud[randomIndex]]);
+        
+                        }
+                    }
+                });
+            });
+            
+            //To randomly populate enemyFighters 
+            const yIndexEnemyFighter = [0, 1, 2, 3, 4];
+            for (let i = 20; i < 1600; i+=10) {
+                let randomIndex =  Math.floor(Math.random()*yIndexEnemyFighter.length);
+                levelSpec.entities.push({
+                    name: 'enemyFighter',
+                    pos: [i*128, yIndexEnemyFighter[randomIndex]*60],
+                })
+            }
+
+            return Promise.all([
+                levelSpec,
+                loadSpriteSheet(levelSpec.spriteSheet),
+            ]);
+        })
+        .then(([levelSpec, backgroundSprites]) => {
+    
+            const level = new Level();
+    
+            setupCollision(levelSpec, level);
+            setupBackgrounds(levelSpec, level, backgroundSprites);
+            setupEntities(levelSpec, level, entityFactory);
+            
+            // console.table(level.tiles.grid);
+    
+            return level;
+        });
+    }
+} 
 
 function createCollisionGrid(tiles, patterns) {
     const grid = new Matrix();
@@ -106,39 +140,33 @@ function expandRange(range) {
 
 function* expandRanges(ranges) {
     for ( const range of ranges) {
-       for (const item of  expandRange(range)) {
-           yield item;
-       }
+      yield* expandRange(range);
     }
 }
 
 
-function expandTiles(tiles, patterns) {
+function* expandTiles(tiles, patterns) {
 
-    const expandedTiles = [];
-
-
-    function walkTiles(tiles, offsetX, offsetY) {
+    function* walkTiles(tiles, offsetX, offsetY) {
         for (const tile of tiles) {
             for (const { x, y } of expandRanges(tile.ranges)) {
                 const derivedX = x + offsetX;
                 const derivedY = y + offsetY;
                 if (tile.pattern) {
                     const patternTiles = patterns[tile.pattern].tiles;
-                    walkTiles(patternTiles, derivedX, derivedY);
+                    yield* walkTiles(patternTiles, derivedX, derivedY);
                 }
                 else {
-                    expandedTiles.push({
+                    yield {
                         tile,
                         x: derivedX,
                         y: derivedY,
-                    });
+                    };
                 }
             } 
         }
     }
 
-    walkTiles(tiles, 0, 0);
+    yield* walkTiles(tiles, 0, 0);
 
-    return expandedTiles;
 }

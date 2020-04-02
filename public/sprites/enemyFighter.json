@@ -1,0 +1,10 @@
+{
+    "imageURL": "../images/aircrafts/F-35.png",
+    "frames" : [
+        {
+            "name": "flying",
+            "scale": 0.6,
+            "rect": [0, 0 , 243, 64]
+        }
+    ]
+}

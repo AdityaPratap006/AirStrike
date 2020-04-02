@@ -24,19 +24,19 @@ export default class Go extends Trait {
             return;
         }
 
-        if(entity.pos.x >= 128*1998) {
-            entity.vel.x = 0;
-            entity.vel.y = 0;
-            return;
-        }
+        // if(entity.pos.x >= 128*1600) {
+        //     entity.vel.x = 0;
+        //     entity.vel.y = 0;
+        //     return;
+        // }
          
-        if (entity.vel.x > 2400) {
-            entity.vel.x = 2400;
+        if (entity.vel.x > 1200) {
+            entity.vel.x = 1200;
             return;
         }
 
-        if(entity.vel.x < 500) {
-            entity.vel.x = 500;
+        if(entity.vel.x < 300) {
+            entity.vel.x = 300;
             return;
         }
 

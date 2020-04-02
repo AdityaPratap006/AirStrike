@@ -8,8 +8,8 @@ export default class Timer {
         this.updateProxy = (time) => { 
             accumulatedTime += (time - lastTime) / 1000;
 
-            if (accumulatedTime > 1) {
-                accumulatedTime = 1;
+            if (accumulatedTime > 0.5) {
+                accumulatedTime = 0.5;
             }
 
             while (accumulatedTime > deltaTime) {
