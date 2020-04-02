@@ -4,7 +4,7 @@ import Go from '../traits/Go.js';
 
 import { loadSpriteSheet } from '../loaders.js';
 import { createAnim } from '../anim.js';
-
+ 
 export async function loadPlayerFighter() {
 
     return loadSpriteSheet('playerFighter')
@@ -36,6 +36,7 @@ function createPlayerFighterFactory(sprite) {
         // playerFighter.vel.set(50000, -100)
         playerFighter.addTrait(new Go());
         playerFighter.addTrait(new Ascend());
+        
                 
         playerFighter.draw = drawPlayerFighter;
 

@@ -1,8 +1,9 @@
 import Camera from './Camera.js';
 import Timer from './Timer.js';
 import { loadLevel } from './loaders/level.js';
-import { loadPlayerFighter } from './entities/playerFighter.js';
-import { loadAircraftExplosion } from './entities/aircraftExplosion.js';
+
+import { loadEntities } from './entities.js';
+
 import { createCollisionLayer, createCameraLayer } from './layers.js';
 import { setupKeyboard } from './input.js';
 // import { setupMouseControl } from './debug.js';
@@ -12,17 +13,20 @@ const context = canvas.getContext('2d');
 
 
 Promise.all([
-    loadPlayerFighter(),
-    loadAircraftExplosion(),
+    loadEntities(),
     loadLevel('1-1'),
 ])
-.then(([ createPlayerFighter, createAircraftExplosion, level, ]) => {
+.then(([ factory, level]) => {
 
+    console.log(factory);
     const camera = new Camera();
     window.camera = camera;
     
-    const playerFighter = createPlayerFighter();
+    const playerFighter = factory.playerFighter();
     playerFighter.pos.set(100, 150);
+
+    
+    //fire missiles
     playerFighter.addTrait({
         NAME: 'fire',
         spawnTimeout: 0,
@@ -38,19 +42,18 @@ Promise.all([
         },
         update(playerFighter, deltaTime) {
             if ( this.spawnTimeout > 0.5 && this.shouldFireMissile ) {
-                const spawn = createPlayerFighter();
-                spawn.pos.x = playerFighter.pos.x;
-                spawn.pos.y = playerFighter.pos.y;
-                spawn.vel.x = playerFighter.vel.x + 500;
-                spawn.vel.y = 100;
-                level.entities.add(spawn);
+                const missile = factory.missile();
+                missile.pos.x = playerFighter.pos.x;
+                missile.pos.y = playerFighter.pos.y + 25;
+            
+                level.entities.add(missile);
                 this.spawnTimeout = 0;
                 this.shouldFireMissile = false;
             }
 
             this.spawnTimeout += deltaTime;
         },
-    })
+    });
 
 
     level.comp.layers.push(createCollisionLayer(level));
@@ -75,10 +78,10 @@ Promise.all([
         }
 
         level.entities.forEach(entity => {
-            if (entity.go && entity.go.isObstructed) {
+            if ((entity.go && entity.go.isObstructed) || (entity.missileLaunch && entity.missileLaunch.isObstructed)) {
                 level.entities.delete(entity);
-                
-                const aircraftExplosion = createAircraftExplosion();
+
+                const aircraftExplosion = factory.aircraftExplosion();
 
                 aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 60);
 

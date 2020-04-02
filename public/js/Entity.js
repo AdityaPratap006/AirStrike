@@ -21,6 +21,7 @@ export default class Entity {
         this.size = new Vector2d(0, 0);
         this.traits = [];
         this.collided = false;
+        this.lifeTime = 0;
     }
 
     addTrait(trait) {
@@ -40,6 +41,8 @@ export default class Entity {
         this.traits.forEach(trait => {
             trait.update(this, deltaTime);
         });
+
+        this.lifeTime += deltaTime;
     }
      
 }
