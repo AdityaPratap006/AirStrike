@@ -35,26 +35,27 @@ export function setupKeyboard(entity) {
     });
 
 
-     // const arrowRight = 'ArrowRight';
-    // input.addMapping(arrowRight, keyState => {
-    //     if(keyState) {
-    //         playerFighter.accelerate.start();
-    //     }
-    //     else{
-    //         playerFighter.accelerate.cancel();
-    //     }
-    // });
+    const Numpad1 = 'Numpad1';
+    input.addMapping(Numpad1, keyState => {
+        if (keyState) {
+            console.log('fire missile!');
+            entity.fire.fireMissile();
+        }
 
-    
-    // const arrowLeft = 'ArrowLeft';
-    // input.addMapping(arrowLeft, keyState => {
-    //     if(keyState) {
-    //         playerFighter.decelerate.start();
-    //     }
-    //     else{
-    //         playerFighter.decelerate.cancel();
-    //     }
-    // });
+        // entity.fire.cancelMissileFire();
+        
+    })
+
+    const Digit1 = 'Digit1';
+    input.addMapping(Digit1, keyState => {
+        if (keyState) {
+            console.log('fire missile!');
+            entity.fire.fireMissile();
+        }
+
+        // entity.fire.cancelMissileFire();
+    })
+
 
     return input;
 }

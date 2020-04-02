@@ -1,6 +1,4 @@
-import { createAircraftExplosion } from './entities.js';
 import TileResolver from './TileResorver.js';
-
 
 export function createBackgroundLayer(level, tiles, sprites) {
     const resolver = new TileResolver(tiles);
@@ -27,20 +25,10 @@ export function createBackgroundLayer(level, tiles, sprites) {
 
     return function drawBackgroundLayer(context, camera) {
 
-        // loadImage('../images/sky3.png')
-        // .then(backgroundImage => {
-        //     for(let i = 0; i < Math.ceil(camera.pos.x/1920) + 1; ++i ) {
-        //         context.drawImage(backgroundImage, 0 - camera.pos.x + i*1920, -320 - camera.pos.y);
-        //     }
-        // }).then(() => {
-            
-        // });
         const drawWidth = resolver.toIndex(camera.size.x);
         const drawFrom = resolver.toIndex(camera.pos.x);
         const drawTo = drawFrom + drawWidth;
         redraw(drawFrom, drawTo);
-
-        
         context.drawImage(buffer, -camera.pos.x % 128, -camera.pos.y);
     };
 }
@@ -54,36 +42,16 @@ export function createSpriteLayer(entities, width, height) {
 
     return function drawSpriteLayer(context, camera) {
 
-         
-
-        
         entities.forEach(entity => {
             spriteBufferContext.clearRect(0, 0, width, height);
 
-            if (entity.go && entity.go.isObstructed) {
-                createAircraftExplosion()
-                .then(aircraftExplosion => {
-                    console.log('draw explosion! ', aircraftExplosion);
-                    aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 60);
-                    entities.add(aircraftExplosion);
-                    setTimeout(() => {
-                        entities.delete(aircraftExplosion);
-                    }, 400);
-                    
-                })
-
-                entities.delete(entity);
-            }
-            else {
-                entity.draw(spriteBufferContext);
-                context.drawImage(
-                    spriteBuffer,
-                    entity.pos.x - camera.pos.x,
-                    entity.pos.y - camera.pos.y,
-                );
-            }
+            entity.draw(spriteBufferContext);
+            context.drawImage(
+                spriteBuffer,
+                entity.pos.x - camera.pos.x,
+                entity.pos.y - camera.pos.y,
+            );
             
-           
         });
     };
 }

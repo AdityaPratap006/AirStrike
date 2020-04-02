@@ -1,5 +1,5 @@
 import  SpriteSheet from './SpriteSheet.js';
-
+import { createAnim } from './anim.js';
 
 export function loadImage(url) {
     return new Promise(resolve => {
@@ -43,6 +43,13 @@ export async function loadSpriteSheet(name) {
                
                 sprites.define(frameSpec.name, x, y, width, height, frameSpec.scale);
             })
+        }
+
+        if ( sheetSpec.animations ) {
+            sheetSpec.animations.forEach(animSpec => {
+                const animation = createAnim(animSpec.frames, animSpec.frameLen);
+                sprites.defineAnim(animSpec.name, animation);
+            });
         }
 
         

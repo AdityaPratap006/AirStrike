@@ -21,5 +21,18 @@
             "scale": 0.7,
             "rect":  [250, 0 , 210,  210]
         }
+    ],
+
+    "animations": [
+        {
+            "name": "explosion",
+            "frameLen": 100,
+            "frames": [
+                "explosion-1",
+                "explosion-2",
+                "explosion-3",
+                "explosion-4"
+            ]
+        }
     ]
 }

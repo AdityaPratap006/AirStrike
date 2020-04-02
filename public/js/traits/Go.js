@@ -17,7 +17,7 @@ export default class Go extends Trait {
 
     update(entity, deltaTime) {
          
-        console.log(entity.vel.x);
+         
         if(this.isObstructed === true) {
             entity.vel.x = 0;
             entity.vel.y = 0;
