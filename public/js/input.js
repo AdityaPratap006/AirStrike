@@ -26,11 +26,13 @@ export function setupKeyboard(entity) {
 
     const D = 'KeyD';
     input.addMapping(D, keyState => {
+        console.log(entity.vel.x);
         entity.go.direction += keyState ? 1 : -1;
     });
 
     const A = 'KeyA';
     input.addMapping(A, keyState => {
+        console.log(entity.vel.x);
         entity.go.direction += keyState ? -1 : 1;
     });
 

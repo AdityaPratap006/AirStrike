@@ -1,8 +1,8 @@
 import Entity from '../Entity.js';
-
-
 import { loadSpriteSheet } from '../loaders.js';
 import { createAnim } from '../anim.js';
+import EnemyAircraft from '../traits/EnemyAircraft.js';
+import Killable from '../traits/Killable.js';
 
 export async function loadEnemyFighter() {
 
@@ -28,8 +28,9 @@ function createEnemyFighterFactory(sprite) {
         enemyFighter.size.set(sprite.width*sprite.scale, sprite.height*sprite.scale);
         enemyFighter.vel.set(-50, 0);
         
-        // enemyFighter.addTrait(new Fly());
-                
+        enemyFighter.addTrait(new EnemyAircraft());
+        enemyFighter.addTrait(new Killable());        
+
         enemyFighter.draw = drawMissile;
 
         return enemyFighter;

@@ -26,7 +26,7 @@ export class FireMissile extends Trait {
         if ( this.spawnTimeout > 0.5 && this.shouldFireMissile ) {
             const missile = this.entityFactory.missile();
             missile.pos.x = firingEntity.pos.x;
-            missile.pos.y = firingEntity.pos.y + 25;
+            missile.pos.y = firingEntity.pos.y +20;
             
             this.level.entities.add(missile);
             this.spawnTimeout = 0;

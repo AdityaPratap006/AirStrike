@@ -22,15 +22,13 @@ function setupBackgrounds(levelSpec, level, backgroundSprites) {
 }
 
 function setupEntities(levelSpec, level, entityFactory) {
-    const directions = [1, -1];
-    let randomDirection = 0;
+  
+
     levelSpec.entities.forEach(({name, pos: [x, y]}) => {
         const createEntity = entityFactory[name];
         const entity = createEntity();
         entity.pos.set(x, y);
-        // randomDirection = directions[Math.floor(Math.random() * directions.length)];
-        // entity.vel.set(50 * randomDirection, 0);
-      
+        entity.vel.set(-(50 + Math.floor(Math.random() * 100)), 0);
         level.entities.add(entity);
     });
 
@@ -62,12 +60,12 @@ export  function createLevelLoader(entityFactory) {
             });
             
             //To randomly populate enemyFighters 
-            const yIndexEnemyFighter = [0, 1, 2, 3, 4];
-            for (let i = 20; i < 1600; i+=10) {
+            const yIndexEnemyFighter = [0, 1, 2];
+            for (let i = 20; i < 1600; i+=20) {
                 let randomIndex =  Math.floor(Math.random()*yIndexEnemyFighter.length);
                 levelSpec.entities.push({
                     name: 'enemyFighter',
-                    pos: [i*128, yIndexEnemyFighter[randomIndex]*60],
+                    pos: [i*128, yIndexEnemyFighter[randomIndex]*128],
                 })
             }
 

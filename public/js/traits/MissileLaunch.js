@@ -5,9 +5,9 @@ export default class MissileLaunch extends Trait {
         super('missileLaunch');
 
         this.direction = 1;
-        this.speed = 2000;
+        this.speed = 2900;
         this.isObstructed = false;
-        this.maxRange = 128*15;
+        this.maxRange = 128*9;
      
     }
 

@@ -40,6 +40,17 @@ async function main(canvas) {
 
     const timer = new Timer(1/60);
 
+    function showAircraftOrMissileExplosion(entity) {
+        const aircraftExplosion = entityFactory.aircraftExplosion();
+
+        aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 60);
+
+        level.entities.add(aircraftExplosion);
+        setTimeout(() => {
+            level.entities.delete(aircraftExplosion);
+        }, 400);    
+    }
+
     timer.update =  function update(deltaTime) { 
         level.update(deltaTime);
 
@@ -52,18 +63,27 @@ async function main(canvas) {
         }
 
         level.entities.forEach(entity => {
-            if ((entity.go && entity.go.isObstructed) || (entity.missileLaunch && (entity.missileLaunch.isObstructed || entity.missileLaunch.passedMaxRange(entity, playerFighter.pos.x)))) {
+            if (entity.go && (entity.go.isObstructed || entity.killable.dead)) {
                 level.entities.delete(entity);
-
-                const aircraftExplosion = entityFactory.aircraftExplosion();
-
-                aircraftExplosion.pos.set(entity.pos.x + 50, entity.pos.y - 60);
-
-                level.entities.add(aircraftExplosion);
-                setTimeout(() => {
-                    level.entities.delete(aircraftExplosion);
-                }, 400);    
+                showAircraftOrMissileExplosion(entity);
             }
+
+            if (entity.missileLaunch && (entity.missileLaunch.isObstructed || entity.killable.dead)) {
+                level.entities.delete(entity);
+                showAircraftOrMissileExplosion(entity);
+            }
+
+            if (entity.missileLaunch &&  entity.missileLaunch.passedMaxRange(entity, playerFighter.pos.x)) {
+                level.entities.delete(entity);
+                 
+            }
+            
+            if(entity.enemyAircraft && entity.killable.dead) {
+                level.entities.delete(entity);
+                showAircraftOrMissileExplosion(entity);
+            }
+
+
         });
 
         level.comp.draw(context, camera);        
