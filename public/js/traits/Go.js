@@ -36,8 +36,8 @@ export default class Go extends Trait {
             return;
         }
 
-        if(entity.vel.x < 500) {
-            entity.vel.x = 500;
+        if(entity.vel.x < 300) {
+            entity.vel.x = 300;
             return;
         }
 

@@ -11,6 +11,7 @@ import { createCameraLayer } from './layers/cameraLayer.js';
 import { setupKeyboard } from './input.js';
 
 import { FireMissile } from './traits/FireMissile.js';
+import { DropBomb } from './traits/DropBomb.js';
 // import { setupMouseControl } from './debug.js';
 
 class AudioBoard {
@@ -58,7 +59,7 @@ async function main(canvas) {
 
     const backgroundMusic = new Audio("../sounds/Uri BGM (Special Force).mp3");
     backgroundMusic.load();
-    backgroundMusic.volume = 0.3;
+    backgroundMusic.volume = 0.1;
     backgroundMusic.loop = true;
     backgroundMusic.play();
    
@@ -93,6 +94,10 @@ async function main(canvas) {
          
     });
 
+    loadAudio("../sounds/bomb.mp3")
+    .then(buffer => {
+        audioBoard.addAudio("bombExplosion", buffer);
+    });
      
 
     const loadLevel = createLevelLoader(entityFactory);
@@ -109,6 +114,10 @@ async function main(canvas) {
 
     //fire missiles
     playerFighter.addTrait(new FireMissile(level, entityFactory));
+
+    //drop bombs
+    playerFighter.addTrait(new DropBomb(level, entityFactory));
+
     
     level.entities.add(playerFighter);
     
@@ -137,6 +146,21 @@ async function main(canvas) {
         }, 400);    
     }
 
+    function showBombExplosion(entity) {
+        
+        audioBoard.playAudio("bombExplosion");
+
+        const bombExplosion = entityFactory.bombExplosion();
+
+        bombExplosion.pos.set(entity.pos.x - 90 , entity.pos.y - 100);
+
+        level.entities.add(bombExplosion);
+
+        setTimeout(() => {
+            level.entities.delete(bombExplosion);
+        }, 900);    
+    }
+
     const timer = new Timer(1/60);
     timer.update =  function update(deltaTime) { 
         gameContext.deltaTime = deltaTime;
@@ -147,8 +171,12 @@ async function main(canvas) {
 
         // machMeter.textContent = ` supercruise maintained for: ${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
 
-        if (playerFighter.pos.x > 100 ) {
-            camera.pos.x = playerFighter.pos.x - 100;
+        if (playerFighter.pos.x > 200 ) {
+            camera.pos.x = playerFighter.pos.x - 200;
+        }
+
+        if (playerFighter.pos.x < 10) {
+            camera.pos.x = playerFighter.pos.x + 10;
         }
 
         if(playerFighter.pos.x > 128*1600) {
@@ -162,7 +190,6 @@ async function main(canvas) {
                 const sadMusic = new Audio("../sounds/sad bgm.mp3");
                 sadMusic.load();
                 sadMusic.volume = 0.2;
-                sadMusic.loop = true;
                 sadMusic.play();
 
                 entity.vel.set(0, 0);
@@ -192,6 +219,11 @@ async function main(canvas) {
             if (entity.missileLaunch &&  entity.missileLaunch.passedMaxRange(entity, playerFighter.pos.x)) {
                 level.entities.delete(entity);
                  
+            }
+
+            if (entity.gravity &&  entity.gravity.isObstructed) {
+                level.entities.delete(entity);
+                showBombExplosion(entity);
             }
             
             if(entity.enemyAircraft ) {

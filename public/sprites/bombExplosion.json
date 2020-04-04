@@ -1,0 +1,63 @@
+{
+    "imageURL": "../images/groundExplosion.png",
+    "frames" : [
+        {
+            "name": "explosion-1",
+            "scale": 0.7,
+            "rect": [0, 0 , 327,  200]
+        },
+        {
+            "name": "explosion-2",
+            "scale": 0.7,
+            "rect": [327, 0 ,  327,  220]
+        },
+        {
+            "name": "explosion-3",
+            "scale": 0.7,
+            "rect":  [654, 0 ,  327,  220]
+        },
+        {
+            "name": "explosion-4",
+            "scale": 0.7,
+            "rect":  [0, 220 ,  327,  220]
+        },
+        {
+            "name": "explosion-5",
+            "scale": 0.7,
+            "rect":  [327, 220 ,  327,  220]
+        },
+        {
+            "name": "explosion-6",
+            "scale": 0.7,
+            "rect":  [654, 220 ,  327,  220]
+        },
+        {
+            "name": "explosion-7",
+            "scale": 0.7,
+            "rect":  [0, 440 ,  327,  220]
+        },
+        {
+            "name": "explosion-8",
+            "scale": 0.7,
+            "rect":  [327, 440 ,  327,  220]
+        },
+        {
+            "name": "explosion-9",
+            "scale": 0.7,
+            "rect":  [654, 440 ,  327,  220]
+        }
+    ],
+
+    "animations": [
+        {
+            "name": "explosion",
+            "frameLen": 100,
+            "frames": [
+                "explosion-1",
+                "explosion-2",
+                "explosion-3",
+                "explosion-4"
+            ]
+        }
+    ]
+}

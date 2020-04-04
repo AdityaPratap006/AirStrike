@@ -44,18 +44,37 @@ export function setupKeyboard(entity) {
             entity.fireMissile.cancelMissileFire();
         }
 
-    })
+    });
 
     const Digit1 = 'Digit1';
     input.addMapping(Digit1, keyState => {
-        if (keyState) {
-           
+        if (keyState) {  
             entity.fireMissile.fireMissile();
         }
         else {
             entity.fireMissile.cancelMissileFire();
         }
-    })
+    });
+
+    const Numpad2 = 'Numpad2';
+    input.addMapping(Numpad2, keyState => {
+        if (keyState) {
+            entity.dropBomb.dropBomb();
+        }
+        else {
+            entity.dropBomb.cancelBombDrop();
+        }
+    });
+
+    const Digit2 = 'Digit2';
+    input.addMapping(Digit2, keyState => {
+        if (keyState) {
+            entity.dropBomb.dropBomb();
+        }
+        else {
+            entity.dropBomb.cancelBombDrop();
+        }
+    });
 
 
     return input;

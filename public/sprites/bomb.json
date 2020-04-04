@@ -1,0 +1,10 @@
+{
+    "imageURL": "../images/weapons/buster_bomb/3.png",
+    "frames" : [
+        {
+            "name": "falling",
+            "scale": 0.35,
+            "rect": [0, 0 , 45,  88]
+        }
+    ]
+}
