@@ -8,6 +8,84 @@
     <script type="module" src="./js/main.js"></script>
 </head>
 <body>
-    <canvas id="screen" width="1280" height="640" class="game-display" ></canvas>
+    <canvas id="screen" width="1280" height="640" ></canvas>
+    <div id="Dashboard">
+
+    </div>
+    <div id="FlightConsole">
+        <p id="speedometer">
+
+        </p>
+        <p id="machmeter">
+
+        </p>
+    </div>
+
+    <div id="controls">
+        <ul>
+            <li>
+                D: Accelerate      
+            </li>
+            <li>
+                A: Decelerate
+            </li>
+            <li>
+                W: Climb
+            </li>
+            <li>
+                S: Descend
+            </li>
+            <li>
+                1: Fire Missile
+            </li>
+            <li>
+                2: Drop Bomb
+            </li>
+        </ul>
+    </div>
+
+    <div id="GameOver" class="hide">
+         <h2 id="resultTitle">
+             GAME OVER
+        </h2>
+         <div class="result">
+            <div class="score">
+                <div>
+                    Aerial Targets Destroyed
+                </div>
+                <div>
+                    :
+                </div>
+                <div id="airScore">
+
+                </div>
+            </div>
+            <div class="score">
+                <div>
+                    Ground Targets Destroyed
+                </div>
+                <div>
+                    :
+                </div>
+                <div id="groundScore">
+
+                </div>
+            </div>
+            <div class="score">
+                <div>
+                    Maintained SuperSonic Flight for
+                </div>
+                <div>
+                    :
+                </div>
+                <div id="superSonicScore">
+
+                </div>
+            </div>
+         </div>
+         <div id="restart-btn">
+            RESTART GAME
+         </div>
+    </div>
 </body>
 </html>

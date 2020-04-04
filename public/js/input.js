@@ -26,13 +26,11 @@ export function setupKeyboard(entity) {
 
     const D = 'KeyD';
     input.addMapping(D, keyState => {
-        console.log(entity.vel.x);
         entity.go.direction += keyState ? 1 : -1;
     });
 
     const A = 'KeyA';
     input.addMapping(A, keyState => {
-        console.log(entity.vel.x);
         entity.go.direction += keyState ? -1 : 1;
     });
 
@@ -40,22 +38,23 @@ export function setupKeyboard(entity) {
     const Numpad1 = 'Numpad1';
     input.addMapping(Numpad1, keyState => {
         if (keyState) {
-            console.log('fire missile!');
             entity.fireMissile.fireMissile();
         }
+        else {
+            entity.fireMissile.cancelMissileFire();
+        }
 
-        // entity.fire.cancelMissileFire();
-        
     })
 
     const Digit1 = 'Digit1';
     input.addMapping(Digit1, keyState => {
         if (keyState) {
-            console.log('fire missile!');
+           
             entity.fireMissile.fireMissile();
         }
-
-        // entity.fire.cancelMissileFire();
+        else {
+            entity.fireMissile.cancelMissileFire();
+        }
     })
 
 

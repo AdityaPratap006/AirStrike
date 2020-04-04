@@ -11,6 +11,192 @@ body {
 
 }
 
-.game-display {
+#screen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
     box-shadow: 0 10px 20px 0 rgb(0, 0, 0, 0.6);
+    z-index: 5;
 }
+
+#Dashboard {
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    
+    cursor: pointer;
+    position: fixed;
+    z-index: 10;
+
+    background-image: url("./images/wallpaper.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#FlightConsole {
+    width: 300px;
+    height: 150px;
+    border-radius: 20px;
+    background: rgb(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+#FlightConsole #speedometer {
+    font-size: 3rem;
+    color: #fff;
+    margin: 0 0 5px 0;
+
+}
+
+#FlightConsole #machmeter {
+    font-size: 2rem;
+    color: #fff;
+    margin: 0  5px 0 0;
+}
+
+
+#controls {
+    width: 300px;
+    height: 150px;
+    border-radius: 20px;
+    background: rgb(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 20px;
+    left: 40px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+#controls ul {
+    width: 100%;
+    height: 90%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#controls ul li {
+    margin:5px 5px;
+    padding: 0;
+    color: #fff;
+    font-size: 1.2rem;
+
+}
+
+#GameOver {
+    width: 50vw;
+    height: 70vh;
+    background: rgb(0, 0, 0, 0.75);
+    border-radius: 20px;
+    position: fixed;
+    top : 50px; 
+    z-index: 15;
+    transition: 0.3s ease-in;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    color: #fff;
+}
+
+#GameOver.hide {
+    z-index: 15;
+    left: 50%;
+    transform: translateX(-50%) translateY(-150%);
+}
+
+#GameOver.show {
+    z-index: 15;
+    left: 50%;
+    transform: translateX(-50%) translateY(0%);
+}
+
+#GameOver .result {
+    margin-bottom: 20px;
+
+    width:80%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#GameOver h2 {
+    font-size: 2.4rem;
+}
+
+#GameOver .result .score{
+
+    width: 100%;
+    height: 30%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 1.5rem;
+
+}
+
+#GameOver .result .score div:nth-child(1) {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#GameOver .result .score div:nth-child(2) {
+    width: 5%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+#GameOver .result .score div:nth-child(3) {
+    width: 25%;
+    height: 100%;
+    font-size: 2.4rem;
+   
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#GameOver #restart-btn {
+     margin: 10px 0;
+     padding: 10px 20px;
+     font-size: 2.4rem;
+     border: 1px solid #fff;
+
+}
+
+#GameOver #restart-btn:hover {
+    cursor: pointer;
+    background: #fff;
+    color: #000;
+} 

@@ -6,7 +6,7 @@
     "tiles": [
         {
             "name": "ground-middle",
-            "index": [8, 0],
+            "index": [7, 2],
             "offsetX": 0,
             "offsetY": 0
         },

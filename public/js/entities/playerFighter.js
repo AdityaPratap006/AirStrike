@@ -6,6 +6,7 @@ import { createAnim } from '../anim.js';
 import Ascend from '../traits/Ascend.js';
 import Go from '../traits/Go.js';
 import Killable from '../traits/Killable.js';
+import SuperCruise from '../traits/SuperCruise.js';
 
 
 class Behaviour extends Trait {
@@ -57,6 +58,7 @@ function createPlayerFighterFactory(sprite) {
         playerFighter.addTrait(new Ascend());
         playerFighter.addTrait(new Behaviour());
         playerFighter.addTrait(new Killable());
+        playerFighter.addTrait(new SuperCruise());
                 
         playerFighter.draw = drawPlayerFighter;
 

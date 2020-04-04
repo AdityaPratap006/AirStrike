@@ -22,12 +22,17 @@ export class FireMissile extends Trait {
 
     }
 
-    update(firingEntity, deltaTime) {
+    update(firingEntity, gameContext) {
+
+        const { deltaTime, audioBoard } = gameContext;
+       
         if ( this.spawnTimeout > 0.5 && this.shouldFireMissile ) {
             const missile = this.entityFactory.missile();
             missile.pos.x = firingEntity.pos.x;
-            missile.pos.y = firingEntity.pos.y +20;
+            missile.pos.y = firingEntity.pos.y + 20;
             
+            audioBoard.playAudio('missile');
+
             this.level.entities.add(missile);
             this.spawnTimeout = 0;
             this.shouldFireMissile = false;

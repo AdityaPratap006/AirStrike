@@ -19,9 +19,9 @@ export default class MissileLaunch extends Trait {
         return (entity.pos.x - firingPosition) > this.maxRange;
     }
 
-    update(entity, deltaTime) {
+    update(entity, gameContext) {
 
-         
+        const { deltaTime } = gameContext;
         if(this.isObstructed === true) {
             entity.vel.x = 0;
             entity.vel.y = 0;

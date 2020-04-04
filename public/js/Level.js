@@ -16,9 +16,11 @@ export default class Level {
         this.tileCollider = new TileCollider(matrix);
     }
 
-    update(deltaTime) {
+    update(gameContext) {
+        const { deltaTime } = gameContext;
+        
         this.entities.forEach(entity => {
-            entity.update(deltaTime);
+            entity.update(gameContext);
 
             entity.pos.x +=  entity.vel.x * deltaTime;
             if (entity.canCollide) {

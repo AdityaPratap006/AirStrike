@@ -1,7 +1,9 @@
 import Level from '../Level.js';
 import { Matrix } from '../math.js';
 
-import { createBackgroundLayer, createSpriteLayer } from '../layers.js';
+import { createBackgroundLayer } from '../layers/backgroundLayer.js';
+import { createSpriteLayer } from '../layers/spriteLayer.js';
+
 import { loadJSON, loadSpriteSheet } from '../loaders.js';
 
 function setupCollision(levelSpec, level) {
@@ -61,11 +63,11 @@ export  function createLevelLoader(entityFactory) {
             
             //To randomly populate enemyFighters 
             const yIndexEnemyFighter = [0, 1, 2];
-            for (let i = 20; i < 1600; i+=20) {
+            for (let i = 40; i < 1600; i+=18) {
                 let randomIndex =  Math.floor(Math.random()*yIndexEnemyFighter.length);
                 levelSpec.entities.push({
                     name: 'enemyFighter',
-                    pos: [i*128, yIndexEnemyFighter[randomIndex]*128],
+                    pos: [i*128, yIndexEnemyFighter[randomIndex]*120],
                 })
             }
 
