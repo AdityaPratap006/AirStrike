@@ -1,0 +1,10 @@
+{
+    "imageURL": "../images/tank.png",
+    "frames" : [
+        {
+            "name": "idle",
+            "scale": 0.36,
+            "rect": [0, 0 , 633,  230]
+        }
+    ]
+}

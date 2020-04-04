@@ -4,6 +4,7 @@ import { loadMissile } from './entities/missile.js';
 import { loadEnemyFighter } from './entities/enemyFighter.js';
 import { loadBomb } from './entities/bomb.js';
 import { loadBombExplosion } from './entities/bombExplosion.js';
+import { loadTank } from './entities/tank.js';
 
 export async function loadEntities() {
 
@@ -20,6 +21,7 @@ export async function loadEntities() {
         loadEnemyFighter().then(addAs('enemyFighter')),
         loadBomb().then(addAs('bomb')),
         loadBombExplosion().then(addAs('bombExplosion')),
+        loadTank().then(addAs('tank')),
     ])
     .then(() => entityFactories);
 }

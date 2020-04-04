@@ -59,7 +59,7 @@ async function main(canvas) {
 
     const backgroundMusic = new Audio("../sounds/Uri BGM (Special Force).mp3");
     backgroundMusic.load();
-    backgroundMusic.volume = 0.1;
+    backgroundMusic.volume = 0.24;
     backgroundMusic.loop = true;
     backgroundMusic.play();
    
@@ -72,7 +72,19 @@ async function main(canvas) {
     // gameOverScreen.classList.add('hide');
 
     let airTargetScore = 0;
+    let groundTargetScore = 0;
 
+    const aerialHitCounter = document.getElementById('aerialHitCounter');
+    const groundHitCounter = document.getElementById('groundHitCounter');
+    const distanceCounter = document.getElementById('distance');
+    const timeCounter = document.getElementById('timer');
+
+
+    groundHitCounter.innerText = `Ground Hits: ${groundTargetScore}`;
+    aerialHitCounter.innerText = `Aerial Hits: ${airTargetScore}`;
+    distanceCounter.innerText = `Distance: 0 Km`;
+    timeCounter.innerText = `Elapsed Time: 0s`;
+    
     const context = canvas.getContext('2d');
 
     const entityFactory = await loadEntities();
@@ -88,13 +100,13 @@ async function main(canvas) {
          
     });
 
-    loadAudio("../sounds/aircraftExplosion.mp3")
+    loadAudio("../sounds/aircraftExplosion2.mp3")
     .then(buffer => {
         audioBoard.addAudio("aircraftExplosion", buffer);
          
     });
 
-    loadAudio("../sounds/bomb.mp3")
+    loadAudio("../sounds/bomb2.mp3")
     .then(buffer => {
         audioBoard.addAudio("bombExplosion", buffer);
     });
@@ -161,30 +173,68 @@ async function main(canvas) {
         }, 900);    
     }
 
+    let elapsedTime = 0;
     const timer = new Timer(1/60);
     timer.update =  function update(deltaTime) { 
         gameContext.deltaTime = deltaTime;
         level.update(gameContext);
+
+        elapsedTime+=deltaTime;
+        timeCounter.innerText = `Elapsed Time: ${Math.round(elapsedTime)} s`;
+
+        distanceCounter.innerText = `Distance: ${(((playerFighter.pos.x < 128*1600 ? playerFighter.pos.x : 128*1600 )/128)*0.036).toFixed(2)} Km`;
 
         speedoMeter.textContent = `${playerFighter.vel.x} Km/h`;
         machMeter.textContent = ` MACH: ${(playerFighter.vel.x / 1235).toFixed(2)}`;
 
         // machMeter.textContent = ` supercruise maintained for: ${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
 
-        if (playerFighter.pos.x > 200 ) {
-            camera.pos.x = playerFighter.pos.x - 200;
+        if (playerFighter.pos.x > 100 ) {
+            camera.pos.x = playerFighter.pos.x - 100;
         }
 
-        if (playerFighter.pos.x < 10) {
-            camera.pos.x = playerFighter.pos.x + 10;
-        }
 
         if(playerFighter.pos.x > 128*1600) {
+
+            timer.stop();
+
             camera.pos.x = 128*1600; 
+
+            backgroundMusic.pause();
+
+                const victoryMusic = new Audio("../sounds/victory.mp3");
+                victoryMusic.load();
+                victoryMusic.volume = 0.2;
+                victoryMusic.play();
+
+
+                gameOverScreen.classList.remove('hide');
+                gameOverScreen.classList.add('show');
+
+                const resultTitle = document.getElementById("resultTitle");
+                resultTitle.innerText = "Mission Complete!";
+
+                const airScore = document.getElementById("airScore");
+                airScore.innerText = `${airTargetScore}`;
+
+                const groundScore = document.getElementById("groundScore");
+                groundScore.innerText = `${groundTargetScore}`;
+
+                const superSonicScore = document.getElementById("superSonicScore");
+                superSonicScore.innerText = `${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
+
+                const restartBtn = document.getElementById("restart-btn");
+                restartBtn.addEventListener('click', (e) => {
+                    window.location.reload();
+                });
+
+                return;
         }
 
         level.entities.forEach(entity => {
             if (entity.go && (entity.go.isObstructed || entity.killable.dead)) {
+                
+                
                 backgroundMusic.pause();
 
                 const sadMusic = new Audio("../sounds/sad bgm.mp3");
@@ -202,13 +252,24 @@ async function main(canvas) {
                 const airScore = document.getElementById("airScore");
                 airScore.innerText = `${airTargetScore}`;
 
+                const groundScore = document.getElementById("groundScore");
+                groundScore.innerText = `${groundTargetScore}`;
+
                 const superSonicScore = document.getElementById("superSonicScore");
                 superSonicScore.innerText = `${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
 
                 const restartBtn = document.getElementById("restart-btn");
                 restartBtn.addEventListener('click', (e) => {
                     window.location.reload();
-                })
+                });
+
+                return;
+            }
+
+            if(entity.groundVehicle && entity.killable.dead) {
+                level.entities.delete(entity);
+                ++groundTargetScore;
+                groundHitCounter.innerText = `Ground Hits: ${groundTargetScore}`;
             }
 
             if (entity.missileLaunch && (entity.missileLaunch.isObstructed || entity.killable.dead)) {
@@ -232,6 +293,7 @@ async function main(canvas) {
                     level.entities.delete(entity);
                     showAircraftOrMissileExplosion(entity);
                     ++airTargetScore;
+                    aerialHitCounter.innerText = `Aerial Hits: ${airTargetScore}`;
                 }
 
                 if(entity.pos.x - camera.pos.x < -100) {
@@ -253,9 +315,9 @@ async function main(canvas) {
 
 const canvas = document.getElementById('screen');
 
-
 const dashboard = document.getElementById('Dashboard');
-dashboard.addEventListener('click', (e) => {
+const startGameBtn = document.getElementById('StartGame');
+startGameBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
     dashboard.parentElement.removeChild(dashboard);

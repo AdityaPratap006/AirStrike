@@ -30,7 +30,12 @@ function setupEntities(levelSpec, level, entityFactory) {
         const createEntity = entityFactory[name];
         const entity = createEntity();
         entity.pos.set(x, y);
-        entity.vel.set(-(50 + Math.floor(Math.random() * 100)), 0);
+
+        if(name === "enemyFighter") {
+            entity.vel.set(-(50 + Math.floor(Math.random() * 100)), 0);
+        }
+        
+
         level.entities.add(entity);
     });
 
@@ -63,11 +68,41 @@ export  function createLevelLoader(entityFactory) {
             
             //To randomly populate enemyFighters 
             const yIndexEnemyFighter = [0, 1, 2];
-            for (let i = 40; i < 1600; i+=18) {
+            for (let i = 40; i < 1600; i+=40) {
                 let randomIndex =  Math.floor(Math.random()*yIndexEnemyFighter.length);
                 levelSpec.entities.push({
                     name: 'enemyFighter',
-                    pos: [i*128, yIndexEnemyFighter[randomIndex]*120],
+                    pos: [i*128, yIndexEnemyFighter[randomIndex]*100],
+                })
+            }
+
+            //To randomly populate tanks on ground, avoiding sea
+            for (let i = 80; i < 150; i+=25) {
+                levelSpec.entities.push({
+                    name: 'tank',
+                    pos: [i*128, 3*150],
+                })
+            }
+
+            for (let i = 250; i < 300; i+=25) {
+                levelSpec.entities.push({
+                    name: 'tank',
+                    pos: [i*128, 3*150],
+                })
+            }
+
+            for (let i = 600; i < 700; i+=25) {
+                levelSpec.entities.push({
+                    name: 'tank',
+                    pos: [i*128, 3*150],
+                })
+            }
+
+
+            for (let i =  1400; i < 1600; i+=25) {
+                levelSpec.entities.push({
+                    name: 'tank',
+                    pos: [i*128, 3*150],
                 })
             }
 

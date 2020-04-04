@@ -4,8 +4,14 @@ export default class Timer {
 
         let lastTime = 0;
         let accumulatedTime = 0;
+        this.shouldTimerStop = false;
 
         this.updateProxy = (time) => { 
+
+            if(this.shouldTimerStop) {
+                return;
+            }
+
             accumulatedTime += (time - lastTime) / 1000;
 
             if (accumulatedTime > 1) {
@@ -30,5 +36,9 @@ export default class Timer {
 
     start() {
         this.enqueue();
+    }
+
+    stop() {
+        this.shouldTimerStop = true;
     }
 }
