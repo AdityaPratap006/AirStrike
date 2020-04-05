@@ -72,7 +72,7 @@ export  function createLevelLoader(entityFactory) {
                 let randomIndex =  Math.floor(Math.random()*yIndexEnemyFighter.length);
                 levelSpec.entities.push({
                     name: 'enemyFighter',
-                    pos: [i*128, yIndexEnemyFighter[randomIndex]*100],
+                    pos: [i*128, yIndexEnemyFighter[randomIndex]*100 + 45],
                 })
             }
 

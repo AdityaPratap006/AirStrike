@@ -55,7 +55,7 @@ export function createCollisionLayer(level) {
 
     return function drawCollision(context, camera) {
         
-        drawTileCandidates(context, camera);
-        drawBoundingBoxes(context, camera);
+        // drawTileCandidates(context, camera);
+        // drawBoundingBoxes(context, camera);
     }
 }

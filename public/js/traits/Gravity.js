@@ -4,7 +4,7 @@ export default class Gravity extends Trait {
     constructor() {
         super('gravity');
 
-        this.gravity = 2000;
+        this.gravity = 3000;
 
         this.isObstructed = false;
     }

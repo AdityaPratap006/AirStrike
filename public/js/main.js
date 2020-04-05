@@ -122,7 +122,7 @@ async function main(canvas) {
     level.comp.layers.push(createCameraLayer(camera));
     
     const playerFighter = entityFactory.playerFighter();
-    playerFighter.pos.set(40, 128*3);
+    playerFighter.pos.set(40, 128*2);
 
     //fire missiles
     playerFighter.addTrait(new FireMissile(level, entityFactory));
@@ -234,7 +234,7 @@ async function main(canvas) {
         level.entities.forEach(entity => {
             if (entity.go && (entity.go.isObstructed || entity.killable.dead)) {
                 
-                
+
                 backgroundMusic.pause();
 
                 const sadMusic = new Audio("../sounds/sad bgm.mp3");

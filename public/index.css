@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Montserrat:wght@300&family=Roboto:wght@500&display=swap');
 
 body {
+    font-family: 'Black Ops One', cursive;   
     padding: 0; 
     margin: 0; 
     display: flex; 
@@ -56,12 +57,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+     
 }
 
 #Dashboard .menu{
-    width: 60vw;
+    width: 75vw;
     height: 70vh;
-    background:  rgb(0, 0, 0, 0.8);
+    background:  rgb(0, 0, 0, 0.7);
     border-radius: 20px;
     box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.6);
 
@@ -70,11 +73,15 @@ body {
     justify-content: flex-start;
     align-items: center;
     padding-top: 20px;
+
+    
 }
 
 #Dashboard .menu .game-title{
     width: 87%;
-    height: 30%;
+    height: 20%;
+    
+    margin: 0 0 10px 0;
     text-align: center;
     color: #fff;
     font-size: 6rem;
@@ -85,16 +92,17 @@ body {
 #Dashboard .menu .summary{
     width: 87%;
     height: 50%;
+    margin-top: 10px;
     text-align: left;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     /* font-style: italic; */
-    
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
 }
 
 #Dashboard .menu #StartGame{
-    margin: 10px 0;
+    margin: 20px 0;
     padding: 10px 20px;
     font-size: 3rem;
     color: #fff;
@@ -103,17 +111,30 @@ body {
 
 }
 
+
+
 #Dashboard .menu #StartGame:hover {
     cursor: pointer;
     background-color: #fff;
     color: #000;
 }
 
+#Dashboard  #dashboard-footer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    font-size: 2rem;
+    font-family: 'Black Ops One', cursive;
+
+}
+
 #FlightConsole {
     width: 300px;
     height: 150px;
     border-radius: 20px;
-    background: rgb(0, 0, 0, 0.6);
+    background: rgb(0, 0, 0, 0.3);
     position: fixed;
     bottom: 20px;
     right: 40px;
@@ -140,10 +161,10 @@ body {
 
 
 #controls {
-    width: 300px;
+    width: 320px;
     height: 150px;
     border-radius: 20px;
-    background: rgb(0, 0, 0, 0.6);
+    background: rgb(0, 0, 0, 0.3);
     position: fixed;
     bottom: 20px;
     left: 40px;
@@ -168,9 +189,9 @@ body {
 
 #controls ul li {
     margin:5px 5px;
-    padding: 0;
+     padding-right: 2px;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1rem;
 
 }
 
@@ -232,12 +253,12 @@ body {
     justify-content: flex-start;
     align-items: center;
 
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
 }
 
 #GameOver .result .score div:nth-child(1) {
-    width: 70%;
+    width: 72%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
@@ -254,9 +275,9 @@ body {
 
 
 #GameOver .result .score div:nth-child(3) {
-    width: 25%;
+    width: 23%;
     height: 100%;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
    
     display: flex;
     justify-content: flex-start;

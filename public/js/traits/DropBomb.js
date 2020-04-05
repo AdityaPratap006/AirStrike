@@ -35,7 +35,7 @@ export class DropBomb extends Trait {
 
             for (let i=0; i<3; ++i) {
                 const bomb = this.entityFactory.bomb();
-                bomb.pos.x = firingEntity.pos.x + 75*i ;
+                bomb.pos.x = firingEntity.pos.x + 50 + 20*i ;
                 bomb.pos.y = firingEntity.pos.y + 30;
                 bomb.vel.x = firingEntity.vel.x;
                 this.level.entities.add(bomb);
