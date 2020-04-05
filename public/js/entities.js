@@ -6,12 +6,15 @@ import { loadBomb } from './entities/bomb.js';
 import { loadBombExplosion } from './entities/bombExplosion.js';
 import { loadTank } from './entities/tank.js';
 
+// eslint-disable-next-line require-await
 export async function loadEntities() {
 
     const entityFactories = {};
 
     function addAs(name) {
-        return factory => entityFactories[name] = factory;
+        return factory => { 
+            entityFactories[name] = factory 
+        };
     }
 
     return Promise.all([

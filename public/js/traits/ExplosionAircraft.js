@@ -16,6 +16,7 @@ export default class ExplosionAircraft extends Trait {
         if(this.duration >= 400) {
             
             this.duration = 0;
+            
             return;
         }
 

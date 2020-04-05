@@ -224,7 +224,7 @@ async function main(canvas) {
                 superSonicScore.innerText = `${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
 
                 const restartBtn = document.getElementById("restart-btn");
-                restartBtn.addEventListener('click', (e) => {
+                restartBtn.addEventListener('click', () => {
                     window.location.reload();
                 });
 
@@ -259,7 +259,7 @@ async function main(canvas) {
                 superSonicScore.innerText = `${Math.floor(playerFighter.supercruise.maintainedFor())} sec`;
 
                 const restartBtn = document.getElementById("restart-btn");
-                restartBtn.addEventListener('click', (e) => {
+                restartBtn.addEventListener('click', () => {
                     window.location.reload();
                 });
 

@@ -7,8 +7,7 @@ export function setupKeyboard(entity) {
         entity.ascend.direction += keyState ? -1 : 1;
         if(keyState) {
             entity.ascend.start();
-        }
-        else{
+        }else{
             entity.ascend.cancel();
         }
     });
@@ -18,8 +17,7 @@ export function setupKeyboard(entity) {
         entity.ascend.direction += keyState ? 1 : -1;
         if(keyState) {
             entity.ascend.start();
-        }
-        else{
+        }else{
             entity.ascend.cancel();
         }
     });
@@ -39,8 +37,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Numpad1, keyState => {
         if (keyState) {
             entity.fireMissile.fireMissile();
-        }
-        else {
+        }else {
             entity.fireMissile.cancelMissileFire();
         }
 
@@ -50,8 +47,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Digit1, keyState => {
         if (keyState) {  
             entity.fireMissile.fireMissile();
-        }
-        else {
+        }else {
             entity.fireMissile.cancelMissileFire();
         }
     });
@@ -60,8 +56,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Numpad2, keyState => {
         if (keyState) {
             entity.dropBomb.dropBomb();
-        }
-        else {
+        }else {
             entity.dropBomb.cancelBombDrop();
         }
     });
@@ -70,8 +65,7 @@ export function setupKeyboard(entity) {
     input.addMapping(Digit2, keyState => {
         if (keyState) {
             entity.dropBomb.dropBomb();
-        }
-        else {
+        }else {
             entity.dropBomb.cancelBombDrop();
         }
     });

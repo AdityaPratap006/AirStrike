@@ -3,7 +3,7 @@ import TileCollider from "./TileCollider.js";
 import EntityCollider from "./EntityCollider.js";
 
 export default class Level {
-    constructor(){
+    constructor() {
         this.gravity = 800;
         this.totalTime = 0;
         this.comp = new Compositor();
